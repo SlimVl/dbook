@@ -7,6 +7,12 @@
 .modal-content {
     background-color: #979797;
 }
-.modal-content .btn-primary {
+.modal-content .btn-primary, #content .btn-primary {
     margin-top: 20px;
+}
+#admin_menu {
+    background-color: black;
+}
+#admin_menu a {
+    display: flex;
 }

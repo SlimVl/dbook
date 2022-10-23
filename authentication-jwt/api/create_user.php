@@ -19,8 +19,13 @@ $db = $database->getConnection();
 // Создание объекта "User"
 $user = new User($db);
 
+
+
 // Получаем данные
 $data = json_decode(file_get_contents("php://input"));
+$user->email = $data->email;
+$email_exists = $user->emailExists();
+//var_dump($email_exists);
 
 // Устанавливаем значения
 $user->firstname = $data->firstname;
@@ -33,7 +38,9 @@ if (
     !empty($user->firstname) &&
     !empty($user->email) &&
     !empty($user->password) &&
+    !$email_exists &&
     $user->create()
+
 ) {
     // Устанавливаем код ответа
     http_response_code(200);

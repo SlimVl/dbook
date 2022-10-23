@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="/dbook/assets/css/main.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="http://localhost/dbook/assets/js/main.js"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
         <title>Моя тестовая страница</title>
@@ -19,8 +20,8 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="/dbook/photos" class="nav-link px-2 text-white" id="photos">Photos</a></li>
+                <li><a href="/dbook/" class="nav-link px-2 text-secondary">Home</a></li>
+                <li><a href="/dbook/photos.php" class="nav-link px-2 text-white" id="photos">Photos</a></li>
                 <li><a href="/dbook/admin/" class="nav-link px-2 text-white">Admin</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
@@ -33,7 +34,8 @@
             <div class="text-end">
                 <?php if (!empty(htmlspecialchars($_COOKIE["jwt"]))) { ?>
                 <button type="button" class="btn btn-outline-light me-1" id="update_account">Account</button>
-                <button type="button" class="btn btn-outline-light me-3" id="logout">Logout</button>
+<!--                <a href="/dbook/account.php" class="btn btn-outline-light me-1" id="update_account">Account</a>-->
+                <button type="button" class="btn btn-outline-light me-3 as" id="logout">Logout</button>
                 <?php } else { ?>
 <!--                <button type="button" class="btn btn-outline-light me-2" id="login">Login</button>-->
                 <button class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button" id="login_modal">Login</button>
@@ -53,12 +55,12 @@
                             <form id="login_form">
                                 <div class="form-group">
                                     <label for="email">Email адрес</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Введите email">
+                                    <input type="email" class="form-control" name="email" placeholder="Введите email">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">Пароль</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль">
+                                    <input type="password" class="form-control" name="password" placeholder="Введите пароль">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Войти</button>
@@ -111,3 +113,13 @@
 
         </div>
         </header>
+    <?php
+    include_once "config/boot.php";
+    include_once "authentication-jwt/api/Objects/User.php";
+
+    $database = new Database();
+    $db = $database->getConnection();
+    $user = new User($db);
+    $u = $user->is_admin();
+    echo $u;
+    ?>

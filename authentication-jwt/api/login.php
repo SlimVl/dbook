@@ -24,6 +24,7 @@ $data = json_decode(file_get_contents("php://input"));
 // Устанавливаем значения
 $user->email = $data->email;
 $email_exists = $user->emailExists();
+//var_dump($email_exists);
 
 // Подключение файлов JWT
 include_once "config/core.php";

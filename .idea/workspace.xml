@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b7b0696-f277-45b9-b148-15e3b6c81854" name="Changes" comment="auth">
-      <change afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/photos.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/account.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-jwt/api/Objects/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-jwt/api/Objects/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-jwt/api/create_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-jwt/api/create_user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authentication-jwt/api/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-jwt/api/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos.php" beforeDir="false" afterPath="$PROJECT_DIR$/photos.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +30,7 @@
       <list>
         <option value="composer.json" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -79,6 +83,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/js" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -116,7 +121,7 @@
       <workItem from="1666158002156" duration="7805000" />
       <workItem from="1666331827209" duration="1187000" />
       <workItem from="1666512799413" duration="10589000" />
-      <workItem from="1666523887349" duration="8213000" />
+      <workItem from="1666523887349" duration="20140000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1666529156144</created>
@@ -125,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666529156144</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="auth">
+      <created>1666543441897</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1666543441897</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

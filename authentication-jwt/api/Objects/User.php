@@ -12,6 +12,7 @@ class User
     public $lastname;
     public $email;
     public $password;
+    public $role;
 
     // Конструктор класса User
     public function __construct($db)
@@ -72,7 +73,7 @@ class User
         $stmt = $this->conn->prepare($query);
 
         // Инъекция
-        $this->email=htmlspecialchars(strip_tags($this->email));
+        $this->email = htmlspecialchars(strip_tags($this->email));
 
         // Привязываем значение e-mail
         $stmt->bindParam(1, $this->email);
@@ -148,5 +149,26 @@ class User
         }
 
         return false;
+    }
+
+    // Проверка юзера на админа
+    function is_admin () {
+//        $id = $this->id;
+        $query = "SELECT role FROM " . $this->table_name . " WHERE role = 1 AND id = ?";
+
+
+        $stmt = $this->conn->prepare($query);
+        // Инъекция
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(":id", $this->id);
+        var_dump($this->id);
+        // Выполняем запрос
+        $stmt->execute();
+
+        // Получаем количество строк
+        $num = $stmt->rowCount();
+        if ($num > 0) {
+            return true;
+        }
     }
 }
