@@ -107,6 +107,17 @@
                             // показать домашнюю страницу и сообщить пользователю, что вход был успешным
                             showHomePage();
                             $("#response").html("<div class='alert alert-success'>Успешный вход в систему.</div>");
+                            $("#login").css("display", "none");
+                            $("#sign_up").css("display", "none");
+                            $("#login_modal").css("display", "none");
+                            var login = `<button type="button" class="btn btn-outline-light me-1" id="update_account">Account</button>
+                <button type="button" class="btn btn-outline-light me-3" id="logout">Logout</button>`;
+                            $(".text-end").append(login);
+                            $("#exampleModalToggle").css("display", "none");
+                            $(".modal-backdrop.fade").remove();
+
+                            // $("#update_account").css("display", "block");
+                            // $("#logout").css("display", "block");
 
                         },
                         error: function(xhr, resp, text){
@@ -129,7 +140,7 @@
                     showUpdateAccountForm();
                 });
 
-// срабатывание при отправке формы «обновить аккаунт»
+                // срабатывание при отправке формы «обновить аккаунт»
                 $(document).on("submit", "#update_account_form", function(){
 
                     // дескриптор для update_account_form
@@ -149,7 +160,7 @@
 
                     // отправить данные формы в API
                     $.ajax({
-                        url: "api/update_user.php",
+                        url: "/dbook/authentication-jwt/api/update_user.php",
                         type : "POST",
                         contentType : "application/json",
                         data : form_data,
@@ -178,10 +189,13 @@
                     return false;
                 });
 
-// выйти из системы
+                // выйти из системы
                 $(document).on("click", "#logout", function(){
                     showLoginPage();
                     $("#response").html("<div class='alert alert-info'>Вы вышли из системы.</div>");
+                    $("#update_account").css("display", "none");
+                    var logout = `<button class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button" id="login_modal">Login</button>`;
+                    $(".text-end").append(logout);
                 });
 
                 // Удаление всех быстрых сообщений
@@ -196,29 +210,29 @@
                     setCookie("jwt", "", 1);
 
                     // форма входа
-                    var html = `
-        <h2>Вход</h2>
-        <form id="login_form">
-            <div class="form-group">
-                <label for="email">Email адрес</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Введите email">
-            </div>
-
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Войти</button>
-        </form>
-        `;
-
-                    $("#content").html(html);
+                    // var html = `
+                    //     <h2>Вход</h2>
+                    //     <form id="login_form">
+                    //         <div class="form-group">
+                    //             <label for="email">Email адрес</label>
+                    //             <input type="email" class="form-control" id="email" name="email" placeholder="Введите email">
+                    //         </div>
+                    //
+                    //         <div class="form-group">
+                    //             <label for="password">Пароль</label>
+                    //             <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль">
+                    //         </div>
+                    //
+                    //         <button type="submit" class="btn btn-primary">Войти</button>
+                    //     </form>
+                    //     `;
+                    //
+                    // $("#content").html(html);
                     clearResponse();
                     showLoggedOutMenu();
                 }
 
-// функция setCookie() поможет нам сохранить JWT в файле cookie
+                // функция setCookie() поможет нам сохранить JWT в файле cookie
                 function setCookie(cname, cvalue, exdays) {
                     var d = new Date();
                     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -226,7 +240,7 @@
                     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
                 }
 
-// эта функция сделает меню похожим на опции для пользователя, вышедшего из системы.
+                // эта функция сделает меню похожим на опции для пользователя, вышедшего из системы.
                 function showLoggedOutMenu(){
                     // показать кнопку входа и регистрации в меню навигации
                     $("#login, #sign_up").show();
@@ -242,14 +256,14 @@
 
                         // если прошел валидацию, показать домашнюю страницу
                         var html = `
-            <div class="card">
-                <div class="card-header">Добро пожаловать!</div>
-                <div class="card-body">
-                    <h5 class="card-title">Вы вошли в систему.</h5>
-                    <p class="card-text">Вы не сможете получить доступ к домашней странице и страницам учетной записи, если вы не вошли в систему.</p>
-                </div>
-            </div>
-        `;
+                            <div class="card">
+                                <div class="card-header">Добро пожаловать!</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Вы вошли в систему.</h5>
+                                    <p class="card-text">Вы не сможете получить доступ к домашней странице и страницам учетной записи, если вы не вошли в систему.</p>
+                                </div>
+                            </div>
+                        `;
 
                         $("#content").html(html);
                         showLoggedInMenu();
@@ -280,7 +294,7 @@
                     return "";
                 }
 
-// если пользователь залогинен
+                // если пользователь залогинен
                 function showLoggedInMenu(){
                     // скрыть кнопки вход и зарегистрироваться с панели навигации и показать кнопку выхода
                     $("#login, #sign_up").hide();
@@ -290,7 +304,7 @@
                 function showUpdateAccountForm() {
                     // валидация JWT для проверки доступа
                     var jwt = getCookie("jwt");
-                    $.post("api/validate_token.php", JSON.stringify({ jwt: jwt })).done(function (result) {
+                    $.post("/dbook/authentication-jwt/api/validate_token.php", JSON.stringify({ jwt: jwt })).done(function (result) {
 
                         // если валидация прошла успешно, покажем данные пользователя в форме
                         var html = `
