@@ -57,6 +57,7 @@ $user = new User($db);
             <table class="table">
                 <thead>
                     <tr>
+                        <th scope="col">№</th>
                         <th scope="col">ID</th>
                         <th scope="col">Имя</th>
                         <th scope="col">Фамилия</th>
@@ -65,14 +66,18 @@ $user = new User($db);
                 </thead>
                 <tbody>
                     <?php $users = $user->all_users();
+                    $i = 1;
                     foreach ($users as $user) { ?>
                         <tr>
-                            <th scope="row"><?php echo $user["id"] ?></th>
+                            <th scope="row"><?php echo $i ?></th>
+                            <th><?php echo $user["id"] ?></th>
                             <td><?php echo $user["firstname"] ?></td>
                             <td><?php echo $user["lastname"] ?></td>
                             <td><?php echo $user["email"] ?></td>
                         </tr>
-                   <?php } ?>
+                   <?php
+                    $i = $i + 1;
+                    } ?>
                 </tbody>
             </table>
         </div>
