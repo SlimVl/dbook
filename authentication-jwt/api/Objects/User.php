@@ -109,7 +109,7 @@ class User
     public function update() {
 
         // Если в HTML-форме был введен пароль (необходимо обновить пароль)
-        $password_set=!empty($this->password) ? ", password = :password" : "";
+        $password_set = !empty($this->password) ? ", password = :password" : "";
 
         // если не введен пароль - не обновлять пароль
         $query = "UPDATE " . $this->table_name . "
@@ -153,22 +153,40 @@ class User
 
     // Проверка юзера на админа
     function is_admin () {
-//        $id = $this->id;
-        $query = "SELECT role FROM " . $this->table_name . " WHERE role = 1 AND id = ?";
 
+        $cook = htmlspecialchars($_COOKIE["jwt"]);
+        if (isset($cook) && $cook != "") {
+            $jwtArr = array_combine(['header', 'payload', 'signature'], explode('.', $cook));
+            $id = explode(':', base64_decode($jwtArr['payload']));
+            $id = explode(",", $id[8]);
+            $id = $id[0];
 
-        $stmt = $this->conn->prepare($query);
-        // Инъекция
-        $this->id = htmlspecialchars(strip_tags($this->id));
-        $stmt->bindParam(":id", $this->id);
-        var_dump($this->id);
-        // Выполняем запрос
-        $stmt->execute();
+            $query = "SELECT id, firstname, lastname, password
+            FROM " . $this->table_name . "
+            WHERE id = $id";
 
-        // Получаем количество строк
-        $num = $stmt->rowCount();
-        if ($num > 0) {
-            return true;
+            // Подготовка запроса
+            $stmt = $this->conn->prepare($query);
+
+            // Выполняем запрос
+            $stmt->execute();
+
+            // Получаем количество строк
+            $num = $stmt->rowCount();
+            if ($num > 0) {
+                return true;
+            }
         }
+        return false;
+    }
+
+    // Получить всех юзеров
+    function all_users () {
+        $query = "SELECT * FROM users";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
     }
 }

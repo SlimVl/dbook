@@ -4,6 +4,12 @@
 /*#logout{*/
 /*    display:none;*/
 /*}*/
+.site-logo {
+    width: 120px;
+}
+header div > a {
+    background: white;
+}
 .modal-content {
     background-color: #979797;
 }
@@ -15,4 +21,7 @@
 }
 #admin_menu a {
     display: flex;
+}
+.all_users {
+    background: white;
 }

@@ -32,6 +32,7 @@ jQuery(function ($) {
 
         clearResponse();
         $("#content").html(html);
+        location.reload();
     });
 
     // выполнение кода при отправке формы
@@ -95,6 +96,8 @@ jQuery(function ($) {
                 // $(".text-end").append(login);
                 $("#exampleModalToggle").css("display", "none");
                 $(".modal-backdrop.fade").remove();
+                location.reload();
+
 
                 // $("#update_account").css("display", "block");
                 // $("#logout").css("display", "block");
@@ -176,6 +179,7 @@ jQuery(function ($) {
         $("#update_account").css("display", "none");
         var logout = `<button class="btn btn-primary 1" data-bs-toggle="modal" href="#exampleModalToggle" role="button" id="login_modal">Login</button>`;
         $(".text-end").append(logout);
+        location.reload();
     });
 
     // Удаление всех быстрых сообщений
@@ -283,7 +287,7 @@ jQuery(function ($) {
         // $("#logout").show();
         // $("#update_account").show();
         var login = `<button type="button" class="btn btn-outline-light me-1" id="update_account">Account</button>
-<button type="button" class="btn btn-outline-light me-3 as" id="logout">Logout</button>`;
+            <button type="button" class="btn btn-outline-light me-3 as" id="logout">Logout</button>`;
         $(".text-end").append(login);
     }
 
